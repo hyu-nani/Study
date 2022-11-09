@@ -27,7 +27,7 @@ void loop()
         String text = Serial.readString();
         Goals = text.toFloat();
     }
-    Result = PID(Goals,0.1,0.1,0.01);
+    Result = PID(Goals,0.01,0.02,0.02);
     Serial.println(Result);
     delay(oneTimeDelay);
 }
