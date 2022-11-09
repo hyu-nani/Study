@@ -26,13 +26,13 @@ float PID(float Goals,
     Result_PID = val;
     float ResultVal = (val + Result *(Arg-1))/Arg;
     Serial.print(val);
-    Serial.print(" ");
+    Serial.print("\t");
     Serial.print(ResultVal);
-    Serial.print(" ");
+    Serial.print("\t");
     Serial.print(int(Kp*100));
-    Serial.print(" ");
+    Serial.print("\t");
     Serial.print(int(Ki*100));
-    Serial.print(" ");
+    Serial.print("\t");
     Serial.println(int(Kd*100));
     return ResultVal;
 }
