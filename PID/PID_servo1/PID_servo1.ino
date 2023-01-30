@@ -5,7 +5,7 @@
 #define servo 9
 
 float Result = 155;
-float oneTimeDelay = 10; // [mS]
+float oneTimeDelay = 40; // [mS]
 
 float pre_P_error = 0;
 float P_error, I_error, D_error;
@@ -45,7 +45,7 @@ void loop()
         Serial.println(Result);
         delay(oneTimeDelay);
     }
-    Goals = 155;
+    Goals = 55;
     while(!((Result > Goals - 1) && (Result < Goals + 1)))
     {
         analogWrite(servo,Result);
