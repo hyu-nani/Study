@@ -1,10 +1,8 @@
-#include <stdio.h>
 #include <iostream>
 #include <math.h>
 using namespace std;
 
-int list[10] = { 0 };
-int check[10] = { 0 };
+int last[42] = { 0 };
 
 int main()
 {
@@ -12,19 +10,14 @@ int main()
 	for (int i = 0; i < 10; i++)
 	{
 		cin >> get;
-		list[i] = get % 42;
+		last[(get % 42)] = 1;
 	}
-	int count;
-	for (int i = 0; i < 10; i++)
+	int count = 0;
+	for (int i = 0; i < 42; i++)
 	{
-		if (list[i] < 42)
-		{
-			for (int j = 0; j < 10; j++)
-			{
-				
-			}
-		}
+		if (last[i] == 1)
+			count++;
 	}
-	printf("%d", count);
+	cout << count << endl;
 	return 0;
 }
