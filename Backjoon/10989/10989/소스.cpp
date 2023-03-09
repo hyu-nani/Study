@@ -38,12 +38,8 @@ N개의 수가 주어졌을 때, 이를 오름차순으로 정렬하는 프로그램을 작성하시오.
 
 using namespace std;
 
-int comp(const void* a, const void* b) 
-{ 
-	return (*(int*)a - *(int*)b); 
-}
-
-int list[10001];
+float list[10000001];
+float sort[10000001];
 
 int main()
 {
@@ -57,8 +53,25 @@ int main()
 		if (list[i] > 10000)
 			return 0;
 	}	
-	qsort(list, n, sizeof(int), comp);
+	
 	for (int i = 0; i < n; i++)
-		cout << list[i] << '\n';
+	{
+		int num = 0;
+		int min = 10000;
+		for (int j = 0; j < n; j++)
+		{
+			if (list[j] < min)
+			{
+				min = list[j];
+				num = j;
+			}
+		}
+		sort[i] = list[num];
+		list[num] = 10000;
+	}
+	for (int i = 0; i < n; i++)
+	{
+		cout << sort[i] << '\n';
+	}
 	return 0;
 }
