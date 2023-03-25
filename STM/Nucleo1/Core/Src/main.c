@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "../Inc/CG9A01.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -95,33 +95,27 @@ int main(void)
   MX_SPI2_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  HAL_StatusTypeDef UARTRcvStat ;
-  HAL_StatusTypeDef SPIRcvStat ;
-  uint8_t buffer[10] = "Hello!\n" ;
-  uint8_t inputDataUart[20] ;
-  uint8_t inputDataSpi[20] ;
-  HAL_UART_Transmit(&huart2, buffer, sizeof(buffer), 100) ;  // send start data
-  
+  //HAL_StatusTypeDef UARTRcvStat ;
+  //HAL_StatusTypeDef SPIRcvStat ;
+  LCD_Init();
   /* USER CODE END 2 */
-
+  HAL_GPIO_WritePin(TFT_BLK_GPIO_Port, TFT_BLK_Pin, GPIO_PIN_SET);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    UARTRcvStat = HAL_UART_Receive(&huart2, inputDataUart, 1, 100) ;  // receive data
-    SPIRcvStat = HAL_SPI_Receive(&hspi2, inputDataSpi, 1, 100);
-    if (UARTRcvStat == HAL_OK) 
-    {  // receive check
-      HAL_SPI_Transmit(&hspi2, inputDataUart, 1, 100) ;  // send received data
-    }
-    if (SPIRcvStat == HAL_OK)
-    {
-      HAL_UART_Transmit(&huart2, inputDataSpi, 1, 100) ;  // send received data
-    }
     /* USER CODE END WHILE */
 
+    LCD_Fill(WHITE);
+    LCD_Fill(LBBLUE);
+    LCD_Fill(LIGHTGREEN);
+    LCD_Fill(DARKBLUE);
+    LCD_Fill(BRRED);
+    LCD_Fill(YELLOW);
+    LCD_Fill(GREEN);
+    LCD_Fill(RED);
+    LCD_Fill(GRED);
     /* USER CODE BEGIN 3 */
-    HAL_SPI_Transmit(&hspi2, "s", 1, 100) ;
   }
   /* USER CODE END 3 */
 }
@@ -183,11 +177,11 @@ static void MX_SPI2_Init(void)
   hspi2.Instance = SPI2;
   hspi2.Init.Mode = SPI_MODE_MASTER;
   hspi2.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi2.Init.DataSize = SPI_DATASIZE_4BIT;
+  hspi2.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi2.Init.NSS = SPI_NSS_SOFT;
-  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_128;
+  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
   hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -259,6 +253,9 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, TFT_BLK_Pin|TFT_DC_Pin|TFT_RST_Pin|TFT_CS_Pin, GPIO_PIN_RESET);
+
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
@@ -271,6 +268,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : TFT_BLK_Pin TFT_DC_Pin TFT_RST_Pin TFT_CS_Pin */
+  GPIO_InitStruct.Pin = TFT_BLK_Pin|TFT_DC_Pin|TFT_RST_Pin|TFT_CS_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */

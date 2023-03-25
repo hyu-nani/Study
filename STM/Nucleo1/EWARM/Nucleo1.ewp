@@ -994,7 +994,7 @@
         </option>
         <option>
           <name>IlinkTrustzoneImportLibraryOut</name>
-          <state></state>
+          <state>Nucleo1_import_lib.o</state>
         </option>
         <option>
           <name>OILinkExtraOption</name>
@@ -1093,6 +1093,24 @@
       <name>User</name>
       <group>
         <name>Core</name>
+        <file>
+          <name>$PROJ_DIR$\..\Core\Src\CG9A01.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Core\Inc\CG9A01.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Core\Inc\main.h</name>
+        </file>
+        <file>
+          <name>$EW_DIR$\arm\inc\c\stdint.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Core\Inc\stm32f0xx_hal_conf.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Core\Inc\stm32f0xx_it.h</name>
+        </file>
         <file>
           <name>$PROJ_DIR$\..\Core\Src\main.c</name>
         </file>
